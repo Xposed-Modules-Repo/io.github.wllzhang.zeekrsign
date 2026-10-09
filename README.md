@@ -6,7 +6,7 @@
 
 **当前版本：1.4，仅适配极氪 App 5.0.7。**
 
-[下载 APK](https://github.com/wllzhang/zeekr-auto-sign/releases/latest) · [源代码](https://github.com/wllzhang/zeekr-auto-sign) · [反馈问题](https://github.com/wllzhang/zeekr-auto-sign/issues)
+[下载 APK](https://github.com/wllzhang/zeekr-auto-sign/releases/latest) · [LS 社区仓库](https://github.com/Xposed-Modules-Repo/io.github.wllzhang.zeekrsign) · [源代码](https://github.com/wllzhang/zeekr-auto-sign) · [反馈问题](https://github.com/wllzhang/zeekr-auto-sign/issues)
 
 ## 功能
 
