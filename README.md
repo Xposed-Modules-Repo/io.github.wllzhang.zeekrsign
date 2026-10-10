@@ -4,7 +4,9 @@
 
 打开极氪 App 时自动确认当天签到，领取可领取的能量球、极值球和已适配奖励。无需后台定时任务，也无需电脑常连。本项目是个人开发的 LSPosed 模块，与极氪官方无关联。
 
-**当前源码版本：1.4.1，仅适配极氪 App 5.0.7。**
+**公开稳定版：1.4.1；公开测试版：1.5.0-test3，仅适配极氪 App 5.0.7。**
+
+测试版支持「模块复制业务 token → 私有 QD 服务器每天签到和领取」，无需手机常连或每天同步。默认只提取凭证；使用原手机签到流程需开启“同时启用手机自动签到和领取”。下载 [1.5.0-test3](https://github.com/wllzhang/zeekr-auto-sign/releases/tag/18-1.5.0-test3)，详见 [QD 模板说明](https://github.com/wllzhang/zeekr-auto-sign/blob/main/qd/README.md)。也保留 [本机文件签到](https://github.com/wllzhang/zeekr-auto-sign/blob/main/server/README.md)。自动续期尚未实现，服务器有奖励时的实际领取仍需验证。
 
 [下载 APK](https://github.com/wllzhang/zeekr-auto-sign/releases/latest) · [LS 社区仓库](https://github.com/Xposed-Modules-Repo/io.github.wllzhang.zeekrsign) · [源代码](https://github.com/wllzhang/zeekr-auto-sign) · [反馈问题](https://github.com/wllzhang/zeekr-auto-sign/issues)
 
@@ -38,7 +40,7 @@
 
 ## 实现与适配限制
 
-模块复用极氪原有 WebActivity、网页登录状态、请求客户端与风险 SDK。登录凭证保持在原 App 页面内，不导出或保存；正式版不启用 WebView 调试。自动流程会临时打开透明、不可触摸的官方签到页面，结束后关闭。1.4.1 使用系统透明 Activity 转换保留下层主界面，修正只设置窗口 alpha 时可能出现的黑屏，并声明模块可见性以确保极氪能够找到统计 Provider。统计页突出今日签到状态及确认天数，没有实际领取时展示说明，避免三项零值与签到状态混淆。
+模块复用极氪原有 WebActivity、网页登录状态、请求客户端与风险 SDK。1.4.1 的登录凭证保持在原 App 页面内；1.5.0-test3 会保存业务 token 到模块私有存储，并允许用户复制到私有 QD 或导出文件；不启用 WebView 调试。启用手机自动流程后会临时打开透明、不可触摸的官方签到页面，结束后关闭。1.4.1 使用系统透明 Activity 转换保留下层主界面，修正只设置窗口 alpha 时可能出现的黑屏，并声明模块可见性以确保极氪能够找到统计 Provider。统计页突出今日签到状态及确认天数，没有实际领取时展示说明，避免三项零值与签到状态混淆。
 
 已实机验证绿色能量球与蓝色极值球，测试阶段实际领取过 1236g 能量和 7 极值，并复查待领取列表为空。碎片、七日连签和生日奖励依据当前官方网页代码适配，尚未实机验证。首次跨日签到仍需日常使用验证。
 
@@ -61,6 +63,10 @@ node tests/auto-flow.test.js
 
 `analysis/`、`build/`、`tools/`、APK 和签名密钥不会提交到源码仓库。发行 APK 通过 GitHub Releases 提供。
 
+## 私有 QD 签到（1.5.0-test3 测试版）
+
+模块支持复制业务 token，在私有 QD 任务中粘贴一次即可由服务器签到和领取，不需要手机在线或每天同步。导入 `qd/zeekr.tpl.json`，仅填写 `token` 参数，设置每天运行；使用方法、结果含义及适配范围见 [QD 模板说明](https://github.com/wllzhang/zeekr-auto-sign/blob/main/qd/README.md)。QD 日志不计入手机统计，凭证失效后重新复制并修改任务参数。
+
 ## 打赏支持
 
 如果这个模块帮到了你，欢迎自愿打赏支持维护。微信 / 支付宝：
@@ -70,3 +76,4 @@ node tests/auto-flow.test.js
 ## 许可证
 
 [MIT License](LICENSE)
+
