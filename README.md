@@ -4,7 +4,7 @@
 
 打开极氪 App 时自动确认当天签到，领取可领取的能量球、极值球和已适配奖励。无需后台定时任务，也无需电脑常连。本项目是个人开发的 LSPosed 模块，与极氪官方无关联。
 
-**当前版本：1.4，仅适配极氪 App 5.0.7。**
+**当前源码版本：1.4.1，仅适配极氪 App 5.0.7。**
 
 [下载 APK](https://github.com/wllzhang/zeekr-auto-sign/releases/latest) · [LS 社区仓库](https://github.com/Xposed-Modules-Repo/io.github.wllzhang.zeekrsign) · [源代码](https://github.com/wllzhang/zeekr-auto-sign) · [反馈问题](https://github.com/wllzhang/zeekr-auto-sign/issues)
 
@@ -24,7 +24,7 @@
 1. 从 [Releases](https://github.com/wllzhang/zeekr-auto-sign/releases/latest) 下载并安装 APK。
 2. 在 LSPosed 中启用“极氪签到助手”，作用域仅勾选极氪（`com.zeekrlife.mobile`）。
 3. 完全关闭极氪并重新打开，保持登录且网络可用。
-4. 在 LSPosed 模块详情打开模块设置，或使用桌面“极氪签到助手”入口查看统计。
+4. 安装或升级后打开一次模块设置，或使用桌面“极氪签到助手”入口查看统计，完成模块首次启动。
 
 公开版包名为 `io.github.wllzhang.zeekrsign`。如果装过包名为 `com.william.zeekrsign` 的测试版，请停用旧模块后启用公开版，避免重复执行；测试版统计不会自动迁移。
 
@@ -38,7 +38,7 @@
 
 ## 实现与适配限制
 
-模块复用极氪原有 WebActivity、网页登录状态、请求客户端与风险 SDK。登录凭证保持在原 App 页面内，不导出或保存；正式版不启用 WebView 调试。自动流程会临时打开透明、不可触摸的官方签到页面，结束后关闭，期间系统状态栏可能短暂变化。
+模块复用极氪原有 WebActivity、网页登录状态、请求客户端与风险 SDK。登录凭证保持在原 App 页面内，不导出或保存；正式版不启用 WebView 调试。自动流程会临时打开透明、不可触摸的官方签到页面，结束后关闭。1.4.1 使用系统透明 Activity 转换保留下层主界面，修正只设置窗口 alpha 时可能出现的黑屏，并声明模块可见性以确保极氪能够找到统计 Provider。统计页突出今日签到状态及确认天数，没有实际领取时展示说明，避免三项零值与签到状态混淆。
 
 已实机验证绿色能量球与蓝色极值球，测试阶段实际领取过 1236g 能量和 7 极值，并复查待领取列表为空。碎片、七日连签和生日奖励依据当前官方网页代码适配，尚未实机验证。首次跨日签到仍需日常使用验证。
 
